@@ -1,1 +1,351 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Zrucaran</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #ebf4ff;
+      color: #2d3748;
+    }
+    header {
+      display: flex;
+      justify-content: flex-end;
+      padding: 1rem;
+      border-bottom: 1px solid #c3dafe;
+      position: relative;
+    }
+    .logo-top {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    .logo-top img {
+      height: 50px;
+      width: 50px;
+      border-radius: 12px;
+    }
+    .language-selector {
+      position: relative;
+    }
+    .flags img {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      margin-left: 4px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block; /* Համոզվում ենք, որ պատկերը տեսանելի է */
+    }
+    .dropdown-flags {
+      display: none;
+      position: absolute;
+      top: 30px;
+      right: 0;
+      background-color: white;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      z-index: 10;
+    }
+    .dropdown-flags img {
+      display: block;
+      margin: 0.3rem 0;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      object-fit: cover;
+    }
+    .main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+    .title {
+      text-align: center;
+      font-size: 2rem;
+      color: #2b6cb0;
+      font-weight: bold;
+      margin-top: 0.5rem;
+    }
+    .info-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      color: #3182ce;
+      margin: 1rem 0;
+    }
+    .info-icons div {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .download-btn {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    .download-btn a {
+      background-color: #3182ce;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 0.8rem;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+    }
+    .screenshot-slider {
+      display: flex;
+      overflow-x: scroll;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      margin-top: 1.5rem;
+      -webkit-overflow-scrolling: touch;
+      padding: 0 1rem;
+    }
+    .screenshot-slider::-webkit-scrollbar {
+      display: none;
+    }
+    .screenshot-slider {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .screenshot-slider .screenshot {
+      flex: 0 0 100%;
+      width: 250px;
+      height: 400px;
+      scroll-snap-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    .screenshot-slider img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      border-radius: 1rem;
+    }
+    .description {
+      background: #f0f4ff;
+      padding: 1rem;
+      border-radius: 1rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      margin-top: 2.5rem;
+    }
+    .description h3 {
+      margin-top: 1rem;
+      color: #2b6cb0;
+      font-weight: bold;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.875rem;
+      color: #718096;
+      padding: 1rem;
+      border-top: 1px solid #cbd5e0;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="language-selector">
+      <img src="https://flagcdn.com/w40/am.png" alt="HY" id="toggle-flags" class="flags" 
+           onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Flag_of_Armenia.svg/1200px-Flag_of_Armenia.svg.png';">
+      <div class="dropdown-flags" id="flag-dropdown">
+        <img src="https://flagcdn.com/w40/am.png" alt="HY" data-lang="hy" 
+             onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Flag_of_Armenia.svg/1200px-Flag_of_Armenia.svg.png';">
+        <img src="https://flagcdn.com/w40/gb.png" alt="EN" data-lang="en">
+        <img src="https://flagcdn.com/w40/ru.png" alt="RU" data-lang="ru">
+        <img src="https://flagcdn.com/w40/es.png" alt="ES" data-lang="es">
+        <img src="https://flagcdn.com/w40/cn.png" alt="CN" data-lang="cn">
+      </div>
+    </div>
+  </header>
+  <div class="logo-top">
+    <img src="upload/logo/Zlogo.png" alt="Logo" />
+  </div>
+  <main class="main">
+    <h1 class="title" data-lang-key="title">Zrucaran</h1>
+    <div class="info-icons">
+      <div><i class="fas fa-star"></i> <span data-lang-key="rating">1K+</span></div>
+      <div><i class="fas fa-flag"></i> <span data-lang-key="age">12+</span></div>
+      <div><i class="fa fa-download"></i> <span data-lang-key="size">25MB</span></div>
+    </div>
+    <div class="download-btn">
+      <a href="Uploads/zrucaran.apk" download data-lang-key="download">Download App</a>
+    </div>
+    <div class="screenshot-slider">
+      <div class="screenshot"><img src="upload/screenshot/ZTube.png" alt="Screenshot 1" /></div>
+      <div class="screenshot"><img src="upload/screenshot/ZGlobal.png" alt="Screenshot 2" /></div>
+      <div class="screenshot"><img src="upload/screenshot/ZShorts.png" alt="Screenshot 3" /></div>
+        <div class="screenshot"><img src="upload/screenshot/ZUsers.png" alt="Screenshot 3" /></div>
+    </div>
+    <div class="description">
+      <p>
+        <span data-lang-key="introDesc">Zrucaran — Կապվիր, կիսվիր, բացահայտիր նոր մարդիկ<br><br>Zrucaran-ը նոր սերնդի բազմաֆունկցիոնալ սոցիալական հարթակ է, որը միավորում է հաղորդակցության, արտահայտման և նոր ծանոթությունների հնարավորությունները մեկ պարզ ու ինտուիտիվ միջավայրում։ Հավելվածը ստեղծված է հայ օգտատերերի համար՝ համապատասխանելով նրանց մշակութային առանձնահատկություններին ու կարիքներին։</span>
+        <h3 data-lang-key="chatTitle">Խոսիր և կապվիր</h3>
+        <span data-lang-key="chatDesc">Սկսիր զրույց ցանկացած ժամանակ, ցանկացած վայրից։ Zrucaran-ի չաթ համակարգը թույլ է տալիս գրել խմբային կամ անձնական հաղորդագրություններ, կիսվել զգացմունքներով և մտքերով իրական ժամանակում։ Յուրաքանչյուր հաղորդագրություն ունի ժամային նշում և հստակ տեսողական տարբերակում՝ հաղորդակցությունն առավել դինամիկ և կազմակերպված դարձնելու համար։</span>
+        <h3 data-lang-key="shareTitle">Կիսվիր քո մտքերով</h3>
+        <span data-lang-key="shareDesc">Հաղորդիր աշխարհին այն, ինչ մտածում ես։ Հավելվածում կարող ես տեղադրել նկարներ, մեջբերումներ, տրամադրություն արտահայտող գրառումներ։ Յուրաքանչյուր հրապարակում հնարավորություն է տալիս ստանալ արձագանքներ՝ հավանումների և մեկնաբանությունների տեսքով։ Սա քո անձնական տարածքն է՝ զգացմունքներիդ և մտքերիդ արտահայտման համար։</span>
+        <h3 data-lang-key="discoverTitle">Բացահայտիր և ծանոթացիր</h3>
+        <span data-lang-key="discoverDesc">Ծանոթությունների էջում կարող ես դիտել այլ օգտատերերի պրոֆիլները՝ անունով, տարիքի նշումով և լուսանկարով։ Հավելվածը տալիս է հարթակ՝ նոր ընկերներ գտնելու, շփման նոր շրջանակներ ստեղծելու և հնարավոր՝ սիրային հարաբերություններ սկսելու համար։</span>
+        <h3 data-lang-key="comfortTitle">Հարմարավետություն ամեն քայլում</h3>
+        <span data-lang-key="comfortDesc">Zrucaran-ն ունի պարզ, հստակ և օգտագործման համար հարմար ինտերֆեյս՝ մեծ ուշադրություն դարձնելով դիզայնի մաքրությանը և հասանելիությանը։ Այն հիանալիորեն աշխատում է Android սարքերում՝ ապահովելով արագություն և հուսալիություն։</span>
+        <h3 data-lang-key="joinTitle">Միացի՛ր Zrucaran-ին</h3>
+        <span data-lang-key="joinDesc">Միացի՛ր Zrucaran-ին ու դարձի՛ր մի մաս նոր սերնդի հայկական սոցիալական աշխարհի։ Արտահայտի՛ր քեզ, լսի՛ր ուրիշներին ու գտի՛ր քոնը՝ հենց հիմա։</span>
+      </p>
+    </div>
+  </main>
+  <footer>
+    <span data-lang-key="footer">© 2025 Zrucaran. Բոլոր իրավունքները պաշտպանված են:</span>
+  </footer>
+  <script>
+    const translations = {
+      hy: {
+        title: "Zrucaran",
+        rating: "1K+",
+        age: "12+",
+        size: "25MB",
+        download: "Ներբեռնել հավելվածը",
+        introDesc: "Zrucaran — Կապվիր, կիսվիր, բացահայտիր նոր մարդիկ<br><br>Zrucaran-ը նոր սերնդի բազմաֆունկցիոնալ սոցիալական հարթակ է, որը միավորում է հաղորդակցության, արտահայտման և նոր ծանոթությունների հնարավորությունները մեկ պարզ ու ինտուիտիվ միջավայրում։ Հավելվածը ստեղծված է հայ օգտատերերի համար՝ համապատասխանելով նրանց մշակութային առանձնահատկություններին ու կարիքներին։",
+        chatTitle: "Խոսիր և կապվիր",
+        chatDesc: "Սկսիր զրույց ցանկացած ժամանակ, ցանկացած վայրից։ Zrucaran-ի չաթ համակարգը թույլ է տալիս գրել խմբային կամ անձնական հաղորդագրություններ, կիսվել զգացմունքներով և մտքերով իրական ժամանակում։ Յուրաքանչյուր հաղորդագրություն ունի ժամային նշում և հստակ տեսողական տարբերակում՝ հաղորդակցությունն առավել դինամիկ և կազմակերպված դարձնելու համար։",
+        shareTitle: "Կիսվիր քո մտքերով",
+        shareDesc: "Հաղորդիր աշխարհին այն, ինչ մտածում ես։ Հավելվածում կարող ես տեղադրել նկարներ, մեջբերումներ, տրամադրություն արտահայտող գրառումներ։ Յուրաքանչյուր հրապարակում հնարավորություն է տալիս ստանալ արձագանքներ՝ հավանումների և մեկնաբանությունների տեսքով։ Սա քո անձնական տարածքն է՝ զգացմունքներիդ և մտքերիդ արտահայտման համար։",
+        discoverTitle: "Բացահայտիր և ծանոթացիր",
+        discoverDesc: "Ծանոթությունների էջում կարող ես դիտել այլ օգտատերերի պրոֆիլները՝ անունով, տարիքի նշումով և լուսանկարով։ Հավելվածը տալիս է հարթակ՝ նոր ընկերներ գտնելու, շփման նոր շրջանակներ ստեղծելու և հնարավոր՝ սիրային հարաբերություններ սկսելու համար։",
+        comfortTitle: "Հարմարավետություն ամեն քայլում",
+        comfortDesc: "Zrucaran-ն ունի պարզ, հստակ և օգտագործման համար հարմար ինտերֆեյս՝ մեծ ուշադրություն դարձնելով դիզայնի մաքրությանը և հասանելիությանը։ Այն հիանալիորեն աշխատում է Android սարքերում՝ ապահովելով արագություն և հուսալիություն։",
+        joinTitle: "Միացի՛ր Zrucaran-ին",
+        joinDesc: "Միացի՛ր Zrucaran-ին ու դարձի՛ր մի մաս նոր սերնդի հայկական սոցիալական աշխարհի։ Արտահայտի՛ր քեզ, լսի՛ր ուրիշներին ու գտի՛ր քոնը՝ հենց հիմա։",
+        footer: "© 2025 Zrucaran. Բոլոր իրավունքները պաշտպանված են:"
+      },
+      en: {
+        title: "Zrucaran",
+        rating: "1K+",
+        age: "12+",
+        size: "25MB",
+        download: "Download App",
+        introDesc: "Zrucaran — Connect, Share, Discover New People<br><br>Zrucaran is a new generation multifunctional social platform that combines communication, self-expression, and the opportunity to meet new people in one simple and intuitive environment. The app is designed for Armenian users, tailored to their cultural characteristics and needs.",
+        chatTitle: "Chat and Connect",
+        chatDesc: "Start a conversation anytime, anywhere. Zrucaran’s chat system allows you to send group or private messages, share emotions and thoughts in real-time. Each message comes with a timestamp and clear visual distinction, making communication more dynamic and organized.",
+        shareTitle: "Share Your Thoughts",
+        shareDesc: "Tell the world what you’re thinking. In the app, you can post pictures, quotes, or mood-expressing updates. Each post offers the chance to receive feedback in the form of likes and comments. This is your personal space to express your emotions and ideas.",
+        discoverTitle: "Discover and Meet",
+        discoverDesc: "On the discovery page, you can view other users’ profiles with their names, ages, and photos. The app provides a platform to find new friends, create new social circles, and possibly even start romantic relationships.",
+        comfortTitle: "Convenience at Every Step",
+        comfortDesc: "Zrucaran features a simple, clear, and user-friendly interface, with a strong focus on clean design and accessibility. It works seamlessly on Android devices, ensuring speed and reliability.",
+        joinTitle: "Join Zrucaran",
+        joinDesc: "Join Zrucaran and become part of the new generation of the Armenian social world. Express yourself, listen to others, and find your place—right now.",
+        footer: "© 2025 Zrucaran. All rights reserved."
+      },
+      ru: {
+        title: "Zrucaran",
+        rating: "1K+",
+        age: "12+",
+        size: "25MB",
+        download: "Скачать приложение",
+        introDesc: "Zrucaran — Общайся, делись, открывай новых людей<br><br>Zrucaran — это многофункциональная социальная платформа нового поколения, которая объединяет возможности общения, самовыражения и знакомства в одной простой и интуитивной среде. Приложение создано для армянских пользователей с учетом их культурных особенностей и потребностей.",
+        chatTitle: "Общайся и будь на связи",
+        chatDesc: "Начинай разговор в любое время и в любом месте. Чат-система Zrucaran позволяет отправлять групповые или личные сообщения, делиться эмоциями и мыслями в реальном времени. Каждое сообщение имеет временную метку и четкое визуальное различие, что делает общение более динамичным и организованным.",
+        shareTitle: "Делись своими мыслями",
+        shareDesc: "Расскажи миру, о чем ты думаешь. В приложении ты можешь публиковать фотографии, цитаты, посты, выражающие твое настроение. Каждая публикация дает возможность получить отклик в виде лайков и комментариев. Это твое личное пространство для выражения эмоций и идей.",
+        discoverTitle: "Открывай и знакомься",
+        discoverDesc: "На странице знакомств ты можешь просматривать профили других пользователей с их именами, возрастом и фотографиями. Приложение предоставляет платформу для поиска новых друзей, создания новых социальных связей и, возможно, начала романтических отношений.",
+        comfortTitle: "Удобство на каждом шагу",
+        comfortDesc: "Zrucaran имеет простой, понятный и удобный интерфейс, уделяя большое внимание чистоте дизайна и доступности. Приложение отлично работает на устройствах Android, обеспечивая скорость и надежность.",
+        joinTitle: "Присоединяйся к Zrucaran",
+        joinDesc: "Присоединяйся к Zrucaran и стань частью нового поколения армянского социального мира. Выражай себя, слушай других и найди свое место — прямо сейчас.",
+        footer: "© 2025 Zrucaran. Все права защищены."
+      },
+      es: {
+        title: "Zrucaran",
+        rating: "1K+",
+        age: "12+",
+        size: "25MB",
+        download: "Descargar App",
+        introDesc: "Zrucaran — Conecta, Comparte, Descubre Nuevas Personas<br><br>Zrucaran es una plataforma social multifuncional de nueva generación que combina la comunicación, la autoexpresión y la oportunidad de conocer gente nueva en un entorno simple e intuitivo. La aplicación está diseñada para usuarios armenios, adaptándose a sus características culturales y necesidades.",
+        chatTitle: "Chatea y Conecta",
+        chatDesc: "Inicia una conversación en cualquier momento y lugar. El sistema de chat de Zrucaran te permite enviar mensajes grupales o privados, compartir emociones y pensamientos en tiempo real. Cada mensaje incluye una marca de tiempo y una clara distinción visual, haciendo que la comunicación sea más dinámica y organizada.",
+        shareTitle: "Comparte Tus Pensamientos",
+        shareDesc: "Dile al mundo lo que piensas. En la aplicación puedes publicar fotos, citas o actualizaciones que expresen tu estado de ánimo. Cada publicación te da la oportunidad de recibir retroalimentación en forma de me gusta y comentarios. Este es tu espacio personal para expresar tus emociones e ideas.",
+        discoverTitle: "Descubre y Conoce",
+        discoverDesc: "En la página de descubrimiento, puedes ver los perfiles de otros usuarios con sus nombres, edades y fotos. La aplicación ofrece una plataforma para encontrar nuevos amigos, crear nuevos círculos sociales y, posiblemente, iniciar relaciones románticas.",
+        comfortTitle: "Comodidad en Cada Paso",
+        comfortDesc: "Zrucaran cuenta con una interfaz simple, clara y fácil de usar, con un fuerte enfoque en un diseño limpio y accesible. Funciona perfectamente en dispositivos Android, garantizando velocidad y confiabilidad.",
+        joinTitle: "Únete a Zrucaran",
+        joinDesc: "Únete a Zrucaran y forma parte del mundo social armenio de nueva generación. Exprésate, escucha a los demás y encuentra tu lugar, ¡ahora mismo!",
+        footer: "© 2025 Zrucaran. Todos los derechos reservados."
+      },
+      cn: {
+        title: "Zrucaran",
+        rating: "1K+",
+        age: "12+",
+        size: "25MB",
+        download: "下载应用",
+        introDesc: "Zrucaran — 连接、分享、发现新朋友<br><br>Zrucaran 是一个新一代多功能社交平台，将沟通、自我表达和结识新朋友的机会融合在一个简单直观的环境中。该应用专为亚美尼亚用户设计，符合他们的文化特点和需求。",
+        chatTitle: "聊天与连接",
+        chatDesc: "随时随地开始对话。Zrucaran 的聊天系统允许你发送群组或私人消息，实时分享情感和想法。每条消息都有时间戳和清晰的视觉区分，使沟通更加动态和有条理。",
+        shareTitle: "分享你的想法",
+        shareDesc: "告诉世界你在想什么。在应用中，你可以发布照片、引用或表达心情的帖子。每篇帖子都可以收到点赞和评论的反馈。这是你表达情感和想法的个人空间。",
+        discoverTitle: "发现与认识",
+        discoverDesc: "在发现页面，你可以查看其他用户的个人资料，包括他们的姓名、年龄和照片。该应用提供了一个平台，让你找到新朋友，建立新的社交圈，甚至可能开启恋爱关系。",
+        comfortTitle: "每一步都舒适",
+        comfortDesc: "Zrucaran 拥有简单、清晰且易于使用的界面，注重设计的简洁性和可访问性。它在 Android 设备上运行得非常好，保证了速度和可靠性。",
+        joinTitle: "加入 Zrucaran",
+        joinDesc: "加入 Zrucaran，成为亚美尼亚新一代社交世界的一部分。表达自我，倾听他人，找到属于你的位置——现在就行动吧！",
+        footer: "© 2025 Zrucaran. 版权所有。"
+      }
+    };
 
+    function changeLanguage(lang) {
+      console.log("Changing language to:", lang); // Լոգինգ՝ ստուգելու համար
+      document.querySelectorAll("[data-lang-key]").forEach(element => {
+        const key = element.getAttribute("data-lang-key");
+        element.innerHTML = translations[lang][key]; // innerHTML՝ <br> պիտակները ճիշտ ցուցադրելու համար
+      });
+      document.documentElement.lang = lang;
+      const flagImage = document.getElementById("toggle-flags");
+      const newSrc = `https://flagcdn.com/w40/${lang === 'en' ? 'gb' : lang}.png`;
+      console.log("Setting flag image src to:", newSrc); // Լոգինգ՝ ստուգելու համար
+      flagImage.src = newSrc;
+      flagImage.alt = lang.toUpperCase();
+      flagImage.style.borderRadius = "50%";
+      flagImage.style.width = "24px";
+      flagImage.style.height = "24px";
+      flagImage.style.objectFit = "cover";
+      flagImage.style.display = "block"; // Համոզվում ենք, որ պատկերը տեսանելի է
+      localStorage.setItem("language", lang);
+    }
+
+    // Էջի բեռնման ժամանակ համոզվում ենք, որ լեզուն ճիշտ է ընտրվում
+    window.onload = function() {
+      const savedLang = localStorage.getItem("language") || 'hy';
+      console.log("Page loaded, default language:", savedLang); // Լոգինգ՝ ստուգելու համար
+      changeLanguage(savedLang);
+    };
+
+    document.getElementById('toggle-flags').addEventListener('click', () => {
+      const dropdown = document.getElementById('flag-dropdown');
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    });
+
+    document.querySelectorAll('.dropdown-flags img').forEach(flag => {
+      flag.addEventListener('click', () => {
+        const lang = flag.getAttribute('data-lang');
+        changeLanguage(lang);
+        document.getElementById('flag-dropdown').style.display = 'none';
+      });
+    });
+  </script>
+</body>
+  </html>
